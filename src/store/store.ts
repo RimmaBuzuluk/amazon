@@ -9,7 +9,7 @@ const store = configureStore({
   },
 });
 
-const fakeAccounts = generateFakeAccounts(25);
+const fakeAccounts = generateFakeAccounts(125);
 store.dispatch(setAccounts(fakeAccounts));
 
 export default store;

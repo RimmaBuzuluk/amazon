@@ -4,21 +4,22 @@ import AccountsTable from './page/AccountTable';
 import ProfilesTable from './page/ProfilesTable';
 import CampaignsTable from './page/CampaignsTable';
 import { Container } from 'react-bootstrap';
+import "./App.css"
 
 function App() {
   return (
-    <div className='App'>
       <Router>
         <Container>
           <Header />
+          <div className='App'>
           <Routes>
             <Route path="/" element={<AccountsTable />} />
             <Route path="/profiles" element={<ProfilesTable />} />
             <Route path="/campaigns/:profileId" element={<CampaignsTable />} />
           </Routes>
+          </div>
         </Container>
       </Router>
-    </div>
   );
 }
 
