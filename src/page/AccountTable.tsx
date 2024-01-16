@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectAccounts } from '../store/slice/accountSlice';
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactPaginate from "react-paginate";
+import {useNavigate } from 'react-router-dom';
 
 const AccountsTable: React.FC = () => {
   const accounts = useSelector(selectAccounts);
@@ -11,6 +12,7 @@ const AccountsTable: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [filterEmail, setFilterEmail] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const navigate = useNavigate();
 
   const handlePageChange = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected);
@@ -29,6 +31,10 @@ const AccountsTable: React.FC = () => {
     const dateB = new Date(b.creationDate).getTime();
 
     return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+  };
+
+  const navigateToProfile = (profileId: string) => {
+    navigate(`/profile/${profileId}`)
   };
 
   const offset = currentPage * itemsPerPage;
@@ -55,7 +61,7 @@ const AccountsTable: React.FC = () => {
         className="mt-4"
         onChange={handleFilter}
       />
-      <div className="mt-2 mb-2">
+      <div className="mt-4 mb-2">
         <Button variant="primary" onClick={handleSort}>
           Sort by Creation Date {sortOrder === 'asc' ? '▲' : '▼'}
         </Button>
@@ -71,12 +77,13 @@ const AccountsTable: React.FC = () => {
         </thead>
         <tbody>
           {paginatedAccounts.map((account) => (
-            <tr key={account.accountId}>
-              <td>{account.accountId}</td>
-              <td>{account.authToken}</td>
-              <td>{account.email}</td>
-              <td>{account.creationDate}</td>
-            </tr>
+            
+              <tr key={account.accountId} onClick={() => navigateToProfile(account.accountId)}>
+                <td>{account.accountId}</td>
+                <td>{account.authToken}</td>
+                <td>{account.email}</td>
+                <td>{account.creationDate}</td>
+              </tr>
           ))}
         </tbody>
       </Table>
