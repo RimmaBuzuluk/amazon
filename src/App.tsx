@@ -14,8 +14,8 @@ function App() {
           <div className='App'>
           <Routes>
             <Route path="/" element={<AccountsTable />} />
-            <Route path="/profiles" element={<ProfilesTable />} />
-            <Route path="/campaigns/:profileId" element={<CampaignsTable />} />
+            <Route path="/profile/:accountId" element={<ProfilesTable />} />
+            {/* <Route path="/profile/:accountId" element={<ProfilesTable />} /> */}
           </Routes>
           </div>
         </Container>

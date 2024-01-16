@@ -15,7 +15,7 @@ const store = configureStore({
 const fakeAccounts = generateFakeAccounts(125);
 store.dispatch(setAccounts(fakeAccounts));
 
-const fakeProfiles=generateFakeProfiles(250, fakeAccounts);
+const fakeProfiles=generateFakeProfiles(2500, fakeAccounts);
 store.dispatch(setProfiles(fakeProfiles))
 
 export default store;
