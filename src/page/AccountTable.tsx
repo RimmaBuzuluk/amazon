@@ -19,7 +19,7 @@ const AccountsTable: React.FC = () => {
 
   return (
     <>
-      <Table striped bordered hover responsive="md" className="mmt-4 mx-auto w-100 table-responsive">
+      <Table striped bordered hover responsive="md" className="mt-4 mx-auto">
         <thead>
           <tr>
             <th>Account ID</th>
@@ -47,7 +47,7 @@ const AccountsTable: React.FC = () => {
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={handlePageChange}
-        containerClassName={'pagination justify-content-center mt-4 align-items: end'}  // Додаємо Bootstrap класи
+        containerClassName={'pagination justify-content-center mt-4 align-items: end;'}  // Додаємо Bootstrap класи
         pageClassName={'page-item'}
         pageLinkClassName={'page-link'}
         previousClassName={'page-item'}

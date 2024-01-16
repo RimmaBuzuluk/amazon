@@ -1,4 +1,3 @@
-// accountSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Account {
@@ -30,5 +29,5 @@ export const { setAccounts } = accountSlice.actions;
 
 export const accountReducer = accountSlice.reducer;
 
-// Створюємо селектор
+
 export const selectAccounts = (state: { account: AccountState }) => state.account.accounts;
