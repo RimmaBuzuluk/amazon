@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Form as RouterForm, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { selectProfiles } from '../store/slice/profileSlice';
 import ReactPaginate from "react-paginate";
 
@@ -10,6 +10,7 @@ const ProfilesTable: React.FC = () => {
   const profiles = useSelector(selectProfiles);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
+  const navigate=useNavigate()
 
   const handlePageChange = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected);
@@ -53,8 +54,12 @@ const ProfilesTable: React.FC = () => {
     );
   });
 
+  const navigateToCampaigns = (campaignId: string) => {
+    navigate(`/compaigns/${campaignId}`)
+  };
+
   const offset = currentPage * itemsPerPage;
-const paginatedProfiles = finalFilteredProfiles.slice(offset, offset + itemsPerPage);
+  const paginatedProfiles = finalFilteredProfiles.slice(offset, offset + itemsPerPage);
   return (
     <>
       <RouterForm className="mb-4 mt-4">
@@ -104,7 +109,7 @@ const paginatedProfiles = finalFilteredProfiles.slice(offset, offset + itemsPerP
         </thead>
         <tbody>
         {paginatedProfiles.map((profile) => (
-          <tr key={profile.profileId}>
+          <tr key={profile.profileId} onClick={()=>navigateToCampaigns(profile.profileId)}>
             <td style={{ fontSize: '30px' }}>{profile.profileId}</td>
             <td style={{ fontSize: '30px' }}>{profile.country}</td>
             <td style={{ fontSize: '30px' }}>{profile.marketplace}</td>

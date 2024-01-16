@@ -15,7 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<AccountsTable />} />
             <Route path="/profile/:accountId" element={<ProfilesTable />} />
-            {/* <Route path="/profile/:accountId" element={<ProfilesTable />} /> */}
+            <Route path="/compaigns/:profileId" element={<CampaignsTable />} />
           </Routes>
           </div>
         </Container>

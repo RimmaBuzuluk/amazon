@@ -22,13 +22,10 @@ const profileSlice = createSlice({
     setProfiles: (state, action: PayloadAction<Profile[]>) => {
       state.profiles = action.payload;
     },
-    addProfile: (state, action: PayloadAction<Profile>) => {
-      state.profiles.push(action.payload);
-    },
   },
 });
 
-export const { setProfiles, addProfile } = profileSlice.actions;
+export const { setProfiles} = profileSlice.actions;
 
 export const profileReducer = profileSlice.reducer;
 
