@@ -30,5 +30,5 @@ export const { setCampaigns } = campaignsSlice.actions;
 
 export const campaignsReducer = campaignsSlice.reducer;
 
-export const selectCampaigns = (state: { campaigns: CampaignState }) => state.campaigns;
+export const selectCampaigns = (state: { campaign: CampaignState }) => state.campaign.campaigns;
 

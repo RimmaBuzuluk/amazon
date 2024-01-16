@@ -4,7 +4,7 @@ import { accountReducer, setAccounts } from "./slice/accountSlice";
 import generateFakeAccounts from "./utils/generateFakeAccounts";
 import { profileReducer, setProfiles } from "./slice/profileSlice.ts";
 import generateFakeProfiles from "./utils/generateFakeProfile";
-import { campaignsReducer, setCampaigns } from "./slice/compaignsSlice.ts";
+import { campaignsReducer, setCampaigns } from "./slice/campaignsSlice.ts";
 import generateFakeCampaigns from "./utils/generateFakeCampaigns.ts";
 
 const store = configureStore({
