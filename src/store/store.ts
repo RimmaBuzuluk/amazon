@@ -21,7 +21,7 @@ store.dispatch(setAccounts(fakeAccounts));
 const fakeProfiles=generateFakeProfiles(700, fakeAccounts);
 store.dispatch(setProfiles(fakeProfiles))
 
-const fakeCampaigns=generateFakeCampaigns(1000, fakeProfiles)
+const fakeCampaigns=generateFakeCampaigns(100000, fakeProfiles)
 store.dispatch(setCampaigns(fakeCampaigns))
 
 export default store;

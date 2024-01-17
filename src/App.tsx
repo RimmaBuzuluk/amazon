@@ -9,8 +9,9 @@ import "./App.css"
 function App() {
   return (
       <Router>
+        <Header />
         <Container>
-          <Header />
+          
           <div className='App'>
           <Routes>
             <Route path="/" element={<AccountsTable />} />

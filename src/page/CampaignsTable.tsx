@@ -1,29 +1,50 @@
-// src/components/CampaignsTable.tsx
-import React, { useState } from 'react';
-import { Table, Form as RouterForm, Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import ReactPaginate from "react-paginate";
+import ReactPaginate from 'react-paginate';
 import { selectCampaigns } from '../store/slice/campaignsSlice';
+import PriceFilterSlider from '../component/PriceFilterSlider';
 
 const CampaignsTable: React.FC = () => {
   const { profileId } = useParams();
   const campaigns = useSelector(selectCampaigns);
+  const [filteredCampaigns, setFilteredCampaigns] = useState(campaigns);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 5;
+  const [itemsPerPage] = useState(10);
+  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [paginatedCampaigns, setPaginatedCampaigns] = useState([]);
+
+  useEffect(() => {
+    filterCampaignsByPrice();
+  }, [campaigns, profileId, currentPage, itemsPerPage, priceRange]);
+
+  const filterCampaignsByPrice = () => {
+    const updatedFilteredCampaigns = campaigns.filter(campaign => campaign.profileId === profileId && campaign.cost >= priceRange[0] && campaign.cost <= priceRange[1]);
+    setFilteredCampaigns(updatedFilteredCampaigns);
+    updatePaginatedCampaigns(updatedFilteredCampaigns);
+  };
+
+  const updatePaginatedCampaigns = (filteredCampaigns) => {
+    const offset = currentPage * itemsPerPage;
+    const paginatedCampaigns = filteredCampaigns.slice(offset, offset + itemsPerPage);
+    setPaginatedCampaigns(paginatedCampaigns); 
+  };
 
   const handlePageChange = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected);
+    filterCampaignsByPrice();
   };
 
-  // You may need to adjust this logic based on your data structure
-  const filteredCampaigns = campaigns.filter(campaign => campaign.profileId === profileId);
+  const handlePriceFilterChange = (newPriceRange: [number, number]) => {
+    setPriceRange(newPriceRange);
+    filterCampaignsByPrice();
+  };
 
-  const offset = currentPage * itemsPerPage;
-  const paginatedCampaigns = filteredCampaigns.slice(offset, offset + itemsPerPage);
 
   return (
     <>
+      <PriceFilterSlider campaigns={campaigns} onPriceChange={handlePriceFilterChange}/>
       <Table striped bordered hover>
         <thead>
           <tr>
